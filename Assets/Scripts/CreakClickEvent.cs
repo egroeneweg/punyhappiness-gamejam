@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ClickEvent : MonoBehaviour
+public class CreakClickEvent : MonoBehaviour
 {
+    [SerializeField] private int baseIncrease = 10;
     private Color startcolor;
     void OnMouseEnter()
     {
-        // add red outline to the object   
+        // add yellow outline to the object   
         startcolor = GetComponent<Renderer>().material.color;
         GetComponent<Renderer>().material.color = Color.yellow;
     }
@@ -18,6 +19,7 @@ public class ClickEvent : MonoBehaviour
     }
     void OnMouseDown()
     {
-        Debug.Log("Clicked on " + gameObject.name);
+        float distanceMod = Vector2.Distance(transform.position, GameObject.Find("Boy").transform.position);
+        transform.parent.GetComponent<ObjectManager>().UpdateAnxiety(baseIncrease, "sound", distanceMod);
     }
 }

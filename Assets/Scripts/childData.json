@@ -1,0 +1,16 @@
+[
+    {
+        "childName": "Jemimah",
+        "childAge": 5,
+        "childFlavour": "Subject Jemimah is not gonna be too challenging, perfect for a first-time rookie like you! He's deaf.",
+        "soundMod": 0.0,
+        "darknessMod": 0.6
+    },
+    {
+        "childName": "Suzie",
+        "childAge": 4,
+        "childFlavour": "Suzie is zo doof als een konijn.",
+        "soundMod": 0.6,
+        "darknessMod": 0.0
+    }
+]
