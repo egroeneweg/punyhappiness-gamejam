@@ -29,18 +29,24 @@ public class ChildMovement : MonoBehaviour
 		// yield new WaitForSeconds (0.5f);
 
         // Target won't change until child has reached last target
-        if(transform.position == target.transform.position) {
-            int options = target.childCount;
-            // if(target.parent != null) options++;
-            if(options == 0) {
-                target = target.parent;
-            } else {
-                target = target.GetChild(Mathf.FloorToInt(Random.value * options));
-            }
+        // if(transform.position.Equals(target.transform.position)) {
+        if(Vector2.Distance(transform.position, target.transform.position) < 0.01f) {
+            Debug.Log("At " + target.name + " : has " + target.childCount + " children");
+            target = chooseTarget();
             Debug.Log("Going to " + target.name);
         } else {
-            // transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            transform.position = target.transform.position;
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
+    }
+
+    Transform chooseTarget() {
+        // if(target.parent != null) {
+        //     if(Random.value < (1 / (target.childCount + 1))) return target.parent;
+        // }
+        // return target.GetChild(Mathf.FloorToInt(Random.value * target.childCount));
+        List<Transform> options = new List<Transform>();
+        if(target.parent != null) options.Add(target.parent);
+        for(int i = 0; i < target.childCount; i++) options.Add(target.GetChild(i));
+        return options[Mathf.FloorToInt(Random.value * options.Count)];
     }
 }
