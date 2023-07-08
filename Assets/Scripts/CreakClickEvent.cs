@@ -7,6 +7,14 @@ public class CreakClickEvent : MonoBehaviour
 {
     [SerializeField] private int baseIncrease = 10;
     private Color startcolor;
+    private ChildTraitsAnxiety childTraitsAnxiety;
+    private GameObject theChild;
+
+    void Start()
+    {
+        theChild = GameObject.Find("Child");
+        childTraitsAnxiety = theChild.GetComponent<ChildTraitsAnxiety>();
+    }
     void OnMouseEnter()
     {
         // add yellow outline to the object   
@@ -19,7 +27,7 @@ public class CreakClickEvent : MonoBehaviour
     }
     void OnMouseDown()
     {
-        float distanceMod = Vector2.Distance(transform.position, GameObject.Find("Boy").transform.position);
-        transform.parent.GetComponent<ObjectManager>().UpdateAnxiety(baseIncrease, "sound", distanceMod);
+        float distanceMod = Vector2.Distance(transform.position, theChild.transform.position);
+        childTraitsAnxiety.UpdateAnxiety(baseIncrease, "sound", distanceMod);
     }
 }

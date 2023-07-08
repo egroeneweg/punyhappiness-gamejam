@@ -23,7 +23,7 @@ public class ChildMovement : MonoBehaviour
     {
         if(Vector2.Distance(transform.position, target.transform.position) < 0.01f) {
             target = chooseTarget();
-            Debug.Log("Going to " + target.name);
+            // Debug.Log("Going to " + target.name);
         } else {
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
