@@ -28,6 +28,6 @@ public class CreakClickEvent : MonoBehaviour
     void OnMouseDown()
     {
         float distanceMod = Vector2.Distance(transform.position, theChild.transform.position);
-        childTraitsAnxiety.UpdateAnxiety(baseIncrease, "sound", distanceMod);
+        childTraitsAnxiety.UpdateAnxiety(baseIncrease, "dark", distanceMod);
     }
 }

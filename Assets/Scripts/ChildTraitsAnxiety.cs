@@ -4,24 +4,32 @@ using UnityEngine;
 
 public class ChildTraitsAnxiety : MonoBehaviour
 {
-    [SerializeField] private string childName = "Jemimah";
-    [SerializeField] private float anxietyTickdownRate = 0.1f;
+    [SerializeField] private string childName;
+    [SerializeField] private int currentAnxiety;
+    private float ticDown;
     private Child currentChild;
-    private int currentAnxiety = 0;
 
     void Start()
     {
-        currentChild = new Child(childName);
+        currentChild = new Child();
+        childName = currentChild.Name;
+        currentAnxiety = currentChild.StartingAnxiety;
+        ticDown = 0;
     }
     void Update()
     {
-        if(currentAnxiety > 0)
+        if(currentAnxiety > currentChild.StartingAnxiety)
         {
-            currentAnxiety -= (int)(anxietyTickdownRate * Time.deltaTime);
+            ticDown += currentChild.AnxietyTickdownRate * Time.deltaTime;
+            if(ticDown >= 1)
+            {
+                currentAnxiety -= 1;
+                ticDown = 0;
+            }
         }
         else
         {
-            currentAnxiety = 0;
+            currentAnxiety = currentChild.StartingAnxiety;
         }
     }
     public void UpdateAnxiety(int baseIncrease, string interactType, float distanceMod)
