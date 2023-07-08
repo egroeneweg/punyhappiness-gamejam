@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
-    public CharacterController2D controller;
+public class Side_PlayerMovement : MonoBehaviour {
+    public Side_CharacterController2D controller;
 
     public float runSpeed = 40f;
     float horizontalMove = 0f;
