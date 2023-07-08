@@ -27,8 +27,12 @@ public class ChildMovement : MonoBehaviour
         } else {
             transform.position = Vector2.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
         }
-        StartCoroutine (());
+        // StartCoroutine(Move());
     }
+
+    // IEnumerator Move() {
+
+    // }
 
     Transform chooseTarget() {
         List<Transform> options = new List<Transform>();
