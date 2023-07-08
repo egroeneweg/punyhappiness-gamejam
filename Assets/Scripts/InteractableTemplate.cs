@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CreakClickEvent : MonoBehaviour
+public class ObjectClickEvent : MonoBehaviour
 {
     [SerializeField] private int baseIncrease;
     [SerializeField] private string interactType;
