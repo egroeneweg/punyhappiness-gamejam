@@ -12,6 +12,7 @@ public class InteractableObject : MonoBehaviour
         {
             if (transform.GetChild(i).name == "Canvas")
             {
+                Debug.Log("Found Canvas");
                 childCanvas = transform.GetChild(i).gameObject;
                 childCanvas.SetActive(false);
             }

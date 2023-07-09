@@ -2,32 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class CreakClickEvent : MonoBehaviour
+public class CreakClickEvent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField] private int baseIncrease = 10;
     private Color startcolor;
     private ChildTraitsAnxiety childTraitsAnxiety;
     private GameObject theChild;
+    private TextMeshProUGUI clickText;
 
     void Start()
     {
         theChild = GameObject.Find("Child");
         childTraitsAnxiety = theChild.GetComponent<ChildTraitsAnxiety>();
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).name == "Text (TMP)")
+            {
+                Debug.Log("Found Text");
+                clickText = transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
+            }
+        }
     }
-    void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
-        // add yellow outline to the object   
-        startcolor = GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.yellow;
+        Debug.Log("Pointer Entering " + gameObject.name);
+        Material fontMaterial = clickText.fontMaterial;
+        Debug.Log(fontMaterial);
+        clickText.fontMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 1.0f);
     }
-    void OnMouseExit()
+    public void OnPointerExit(PointerEventData pointerEventData)
     {
-        GetComponent<Renderer>().material.color = startcolor;
+        clickText.fontMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
     }
-    void OnMouseDown()
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
         float distanceMod = Vector2.Distance(transform.position, theChild.transform.position);
-        childTraitsAnxiety.UpdateAnxiety(baseIncrease, "dark", distanceMod);
+        childTraitsAnxiety.UpdateAnxiety(baseIncrease, "sound", distanceMod);
     }
 }
